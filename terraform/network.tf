@@ -28,12 +28,6 @@ resource "cloudstack_port_forward" "forward" {
         virtual_machine_id = "${element(cloudstack_instance.server.*.id, count.index)}"
     }
     forward {
-        protocol = "tcp"
-        private_port = 443
-        public_port = 443
-        virtual_machine_id = "${element(cloudstack_instance.server.*.id, count.index)}"
-    }
-    forward {
         protocol = "udp"
         private_port = 53
         public_port = 53
@@ -49,12 +43,6 @@ resource "cloudstack_port_forward" "forward" {
 	protocol = "tcp"
 	private_port = 2380
 	public_port = 2380
-	virtual_machine_id = "${element(cloudstack_instance.server.*.id, count.index)}"
-    }
-    forward {
-	protocol = "tcp"
-	private_port = 5000
-	public_port = 5000
 	virtual_machine_id = "${element(cloudstack_instance.server.*.id, count.index)}"
     }
 }
@@ -83,14 +71,14 @@ resource "cloudstack_network_acl_rule" "acl-rule" {
       action = "allow"
       cidr_list  = ["${cloudstack_vpc.vpc.0.source_nat_ip}/32","${cloudstack_vpc.vpc.1.source_nat_ip}/32", "${cloudstack_vpc.vpc.2.source_nat_ip}/32", "10.0.0.0/24"]
       protocol = "tcp"
-      ports = ["22","2379-2380","5355","5000"]
+      ports = ["22","2379-2380"]
       traffic_type = "ingress"
     }
     rule {
       action = "allow"
-      cidr_list  = ["195.66.90.0/24"]
+      cidr_list  = ["0.0.0.0/0"]
       protocol = "tcp"
-      ports = ["22","2379-2380","5355","53","443","9090","5000","8080"]
+      ports = ["22"]
       traffic_type = "ingress"
     }
     rule {
@@ -98,27 +86,6 @@ resource "cloudstack_network_acl_rule" "acl-rule" {
       cidr_list  = ["0.0.0.0/0"]
       protocol = "udp"
       ports = ["53"]
-      traffic_type = "ingress"
-    }
-    rule {
-      action = "allow"
-      cidr_list  = ["85.222.236.0/24", "195.137.242.0/24", "85.222.238.0/24"]
-      protocol = "tcp"
-      ports = ["2379","5000"]
-      traffic_type = "ingress"
-    }
-    rule {
-      action = "allow"
-      cidr_list  = ["85.222.237.164/32", "85.222.238.218/32", "85.222.238.219/32"]
-      protocol = "tcp"
-      ports = ["5000"]
-      traffic_type = "ingress"
-    }
-    rule {
-      action = "allow"
-      cidr_list  = ["0.0.0.0/0"]
-      protocol = "tcp"
-      ports = ["443"]
       traffic_type = "ingress"
     }
 }
