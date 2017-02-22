@@ -1,37 +1,37 @@
 template {
-  destination = "/certs/cust1.pass"
+  destination = "/secrets/cust1.pass"
   contents = "{{ with secret \"saas/secret/prod/applications/hello-sbp-world/cust1_pass\" }}{{ .Data.value }}{{ end }}"
 }
 template {
-  destination = "/certs/ns1.sbp.world.crt"
+  destination = "/secrets/ns1.sbp.world.crt"
   contents = "{{ with secret \"saas/secret/prod/applications/hello-sbp-world/ns1-sbp-world\" }}{{ .Data.cert }}{{ end }}"
 }
 template {
-  destination = "/certs/ns1.sbp.world.key"
+  destination = "/secrets/ns1.sbp.world.key"
   contents = "{{ with secret \"saas/secret/prod/applications/hello-sbp-world/ns1-sbp-world\" }}{{ .Data.key }}{{ end }}"
 }
 template {
-  destination = "/certs/ns2.sbp.world.crt"
+  destination = "/secrets/ns2.sbp.world.crt"
   contents = "{{ with secret \"saas/secret/prod/applications/hello-sbp-world/ns2-sbp-world\" }}{{ .Data.cert }}{{ end }}"
 }
 template {
-  destination = "/certs/ns2.sbp.world.key"
+  destination = "/secrets/ns2.sbp.world.key"
   contents = "{{ with secret \"saas/secret/prod/applications/hello-sbp-world/ns2-sbp-world\" }}{{ .Data.key }}{{ end }}"
 }
 template {
-  destination = "/certs/ns3.sbp.world.crt"
+  destination = "/secrets/ns3.sbp.world.crt"
   contents = "{{ with secret \"saas/secret/prod/applications/hello-sbp-world/ns3-sbp-world\" }}{{ .Data.cert }}{{ end }}"
 }
 template {
-  destination = "/certs/ns3.sbp.world.key"
+  destination = "/secrets/ns3.sbp.world.key"
   contents = "{{ with secret \"saas/secret/prod/applications/hello-sbp-world/ns3-sbp-world\" }}{{ .Data.key }}{{ end }}"
 }
 template {
-  destination = "/certs/hello-sbp-world.crt"
+  destination = "/secrets/hello-sbp-world.crt"
   contents = "{{ with secret \"saas/secret/prod/applications/hello-sbp-world/hello-sbp-world-crt\" }}{{ .Data.value }}{{ end }}"
 }
 template {
-  destination = "/certs/hello-sbp-world.key"
+  destination = "/secrets/hello-sbp-world.key"
   contents = "{{ with secret \"saas/secret/prod/applications/hello-sbp-world/hello-sbp-world-key\" }}{{ .Data.value }}{{ end }}"
 }
 vault {
