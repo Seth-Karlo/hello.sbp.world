@@ -17,6 +17,6 @@ make bin
 cd ../..
 mv ${1}/consul-template/pkg/linux_amd64/consul-template .
 
-docker build -t registry.services.schubergphilis.com:5000/saas/consul-template:${1} .
+docker build -t sethkarlo/consul-template:${1} .
 
-docker push registry.services.schubergphilis.com:5000/saas/consul-template:${1}
+docker push sethkarlo/consul-template:${1}
