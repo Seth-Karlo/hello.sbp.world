@@ -1,4 +1,8 @@
 template {
+  destination = "/secrets/root.pass"
+  contents = "{{ with secret \"saas/secret/prod/applications/hello-sbp-world/root_pass\" }}{{ .Data.value }}{{ end }}"
+}
+template {
   destination = "/secrets/cust1.pass"
   contents = "{{ with secret \"saas/secret/prod/applications/hello-sbp-world/cust1_pass\" }}{{ .Data.value }}{{ end }}"
 }
