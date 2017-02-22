@@ -1,0 +1,15 @@
+[Unit]
+Description=SkyDNS service discovery
+After=docker.service etcd3.service
+Requires=docker.service etcd3.service
+
+[Service]
+Restart=always
+EnvironmentFile=/etc/environment
+ExecStartPre=-/usr/bin/env docker kill skydns
+ExecStartPre=-/usr/bin/env docker rm skydns
+ExecStartPre=/usr/bin/env docker pull sethkarlo/skydns:2.5.4-auth
+ExecStartPre=-/usr/bin/env bash -c '/home/core/etcdctl3 --endpoints=http://${COREOS_PRIVATE_IPV4}:4001 put /skydns/config \'{"dns_addr":"0.0.0.0:53","ttl":30,"nameservers":["8.8.8.8:53","8.8.4.4:53"],"domain":"sbp.world","no_rec":true}\' '
+ExecStart=/usr/bin/env bash -c '/usr/bin/docker start -a skydns || exec docker run --name skydns -p 53:53/udp -p 53:53/tcp -e ETCD_USERNAME=skydns -e ETCD_PASSWORD=$YOUR_ETCD_PASSWORD -e ETCD_MACHINES=http://${COREOS_PRIVATE_IPV4}:4001/ sethkarlo/skydns:2.5.4-auth -etcd3'
+ExecStop=/usr/bin/docker stop skydns
+ExecStop=/usr/bin/docker rm skydns
