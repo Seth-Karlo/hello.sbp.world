@@ -1,0 +1,6 @@
+[Unit]
+Description=Updates secrets from Vault
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/sh -c 'docker run --rm -v /usr/share/ca-certificates/:/usr/share/ca-certificates/ -v /etc/ssl:/etc/ssl -v /opt/secrets:/secrets sethkarlo/consul-template:v0.18.1 -config=/secrets/config.json -once'
