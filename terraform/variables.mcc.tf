@@ -1,4 +1,3 @@
-variable "vault_token" { }
 variable "bootstrap_pubkey" {}
 
 variable "counts" {

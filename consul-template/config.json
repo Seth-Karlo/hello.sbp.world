@@ -1,0 +1,41 @@
+template {
+  destination = "/certs/cust1.pass"
+  contents = "{{ with secret \"saas/secret/prod/applications/hello-sbp-world/cust1_pass\" }}{{ .Data.value }}{{ end }}"
+}
+template {
+  destination = "/certs/ns1.sbp.world.crt"
+  contents = "{{ with secret \"saas/secret/prod/applications/hello-sbp-world/ns1-sbp-world\" }}{{ .Data.cert }}{{ end }}"
+}
+template {
+  destination = "/certs/ns1.sbp.world.key"
+  contents = "{{ with secret \"saas/secret/prod/applications/hello-sbp-world/ns1-sbp-world\" }}{{ .Data.key }}{{ end }}"
+}
+template {
+  destination = "/certs/ns2.sbp.world.crt"
+  contents = "{{ with secret \"saas/secret/prod/applications/hello-sbp-world/ns2-sbp-world\" }}{{ .Data.cert }}{{ end }}"
+}
+template {
+  destination = "/certs/ns2.sbp.world.key"
+  contents = "{{ with secret \"saas/secret/prod/applications/hello-sbp-world/ns2-sbp-world\" }}{{ .Data.key }}{{ end }}"
+}
+template {
+  destination = "/certs/ns3.sbp.world.crt"
+  contents = "{{ with secret \"saas/secret/prod/applications/hello-sbp-world/ns3-sbp-world\" }}{{ .Data.cert }}{{ end }}"
+}
+template {
+  destination = "/certs/ns3.sbp.world.key"
+  contents = "{{ with secret \"saas/secret/prod/applications/hello-sbp-world/ns3-sbp-world\" }}{{ .Data.key }}{{ end }}"
+}
+template {
+  destination = "/certs/hello-sbp-world.crt"
+  contents = "{{ with secret \"saas/secret/prod/applications/hello-sbp-world/hello-sbp-world-crt\" }}{{ .Data.value }}{{ end }}"
+}
+template {
+  destination = "/certs/hello-sbp-world.key"
+  contents = "{{ with secret \"saas/secret/prod/applications/hello-sbp-world/hello-sbp-world-key\" }}{{ .Data.value }}{{ end }}"
+}
+vault {
+  "address" = "https://myvault.schubergphilis.com:8201"
+  "token" = "12345678-1234-1234-1234-1234567891011"
+  "renew_token" = true
+}
